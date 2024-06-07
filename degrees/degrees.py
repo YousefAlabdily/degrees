@@ -101,7 +101,7 @@ def shortest_path(source, target):
 
     while True:
         if frontier.empty():
-            return 'no path
+            return None
 
         node = frontier.remove()
 
