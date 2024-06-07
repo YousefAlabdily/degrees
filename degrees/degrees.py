@@ -55,7 +55,7 @@ def load_data(directory):
 def main():
     if len(sys.argv) > 2:
         sys.exit("Usage: python degrees.py [directory]")
-    directory = 'D:/courses/degrees/small/'
+    directory = '/workspaces/153524766/week 1/degrees/large'
 
     # Load data from files into memory
     print("Loading data...")
@@ -82,7 +82,7 @@ def main():
             person2 = people[path[i + 1][1]]["name"]
             movie = movies[path[i + 1][0]]["title"]
             print(f"{i + 1}: {person1} and {person2} starred in {movie}")
-    
+
 
 def shortest_path(source, target):
     """
@@ -100,13 +100,11 @@ def shortest_path(source, target):
     explored = set()
 
     while True:
-        if frontier.empty() == True:
-            raise Exception ('no slotion')
-        
+        if frontier.empty():
+            return 0
 
         node = frontier.remove()
-        states_explored += 1
-
+        
 
         if node.state == target:
             output = []
@@ -115,13 +113,14 @@ def shortest_path(source, target):
                 node = node.parent
             output.reverse()
             return output
-        
+
         explored.add(node.state)
         for movie_id, person_id in neighbors_for_person(node.state):
             if not frontier.contains_state(person_id) and person_id not in explored:
                 child = Node(state=person_id, parent=node, action=movie_id)
                 frontier.add(child)
-    raise NotImplementedError
+
+
 
 def person_id_for_name(name):
     """
@@ -164,3 +163,4 @@ def neighbors_for_person(person_id):
 
 if __name__ == "__main__":
     main()
+
